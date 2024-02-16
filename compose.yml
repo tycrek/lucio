@@ -1,0 +1,9 @@
+services:
+  lucio:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "38351:38351"
+    tty: true
+    environment:
+      - NODE_ENV=production
