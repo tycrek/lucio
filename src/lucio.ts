@@ -19,8 +19,10 @@ app.post('/voice', (req, res) => {
 	log.info('Call received');
 
 	const tres = new twiml.VoiceResponse();
-	tres.pause({ length: 1 });
+	tres.say('Welcome');
+	tres.pause({ length: 2 });
 	tres.play({ digits: '99' });
+	tres.pause({ length: 2 });
 
 	res.type('text/xml').send(tres.toString());
 });
