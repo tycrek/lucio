@@ -1,6 +1,6 @@
 import express from 'express';
-import { twiml } from 'twilio';
 import { TLog } from '@tycrek/log';
+import { respond } from './twilio';
 
 const PORT = 38351;
 const log = new TLog();
@@ -17,14 +17,7 @@ app.get('/', (req, res) => res.sendStatus(200));
 // Answer call
 app.post('/voice', (req, res) => {
 	log.info('Call received');
-
-	const tres = new twiml.VoiceResponse();
-	tres.say('Welcome');
-	tres.pause({ length: 2 });
-	tres.play({ digits: '99' });
-	tres.pause({ length: 2 });
-
-	res.type('text/xml').send(tres.toString());
+	res.type('text/xml').send(respond().toString());
 });
 
 // Start
