@@ -21,4 +21,5 @@ app.post('/voice', (req, res) => {
 });
 
 // Start
-log.info('~ lucio ~').blank().callback(() => app.listen(PORT, () => log.success(`Server running on port ${PORT}`)));
+log.info('~ lucio ~').blank().callback(() =>
+	app.listen(PORT, () => log.success(`Server running on port ${PORT}`)));
