@@ -1,3 +1,8 @@
+////
+import * as dotenv from 'dotenv';
+dotenv.config({ path: process.cwd() + '/.env' });
+////
+
 import express from 'express';
 import { TLog } from '@tycrek/log';
 import { respond } from './twilio';
