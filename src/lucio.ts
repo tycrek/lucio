@@ -5,7 +5,7 @@ dotenv.config({ path: process.cwd() + '/.env' });
 
 import express from 'express';
 import { TLog } from '@tycrek/log';
-import { respond } from './twilio';
+import { respond, alert } from './twilio';
 
 const PORT = 38351;
 const log = new TLog();
@@ -23,6 +23,11 @@ app.get('/', (req, res) => res.sendStatus(200));
 app.post('/voice', (req, res) => {
 	log.info('Call received');
 	res.type('text/xml').send(respond().toString());
+
+	// Send SMS alert
+	alert()
+		.then((msg) => log.info('Alert sent', msg.sid))
+		.catch((err) => log.error(err));
 });
 
 // Start

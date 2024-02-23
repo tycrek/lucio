@@ -1,5 +1,7 @@
-import { twiml } from 'twilio';
+import twilio, { twiml } from 'twilio';
 import VoiceResponse from 'twilio/lib/twiml/VoiceResponse';
+
+const smsClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const wait = (r: VoiceResponse) => r.pause({ length: 1 });
 const tone = (r: VoiceResponse) => {
@@ -17,3 +19,10 @@ export const respond = () => {
 
 	return r;
 };
+
+export const alert = () =>
+	smsClient.messages.create({
+		from: process.env.SMS_FROM,
+		to: process.env.SMS_TO,
+		body: 'Door open'
+	});
